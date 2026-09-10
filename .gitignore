@@ -1,0 +1,28 @@
+# Credenciales y configuración local
+.env
+.env.*
+!.env.example
+wp-config.php
+
+# Dependencias comerciales (TheGem / Dominion)
+vendor-private/
+private-packages/
+*.zip
+
+# WordPress generado
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backup*/
+wp-content/debug.log
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Runtime y pruebas
+node_modules/
+coverage/
+*.log
