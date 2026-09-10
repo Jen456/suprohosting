@@ -1,0 +1,261 @@
+openapi: 3.1.0
+info:
+  title: SuproHosting Frontend Contract
+  version: 0.1.0
+  description: >-
+    Contrato preliminar para desacoplar la experiencia visual del futuro backend.
+    No representa endpoints desplegados.
+servers:
+  - url: https://api.suprohosting.com/v1
+    description: Producción futura
+paths:
+  /catalog/hosting:
+    get:
+      operationId: listHostingPlans
+      summary: Lista los planes publicables con precios de alta y renovación
+      responses:
+        '200':
+          description: Catálogo disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [currency, plans]
+                properties:
+                  currency:
+                    type: string
+                    const: USD
+                  plans:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/HostingPlan'
+  /domains/check:
+    post:
+      operationId: checkDomain
+      summary: Comprueba disponibilidad y precio sin registrar el dominio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [domain]
+              properties:
+                domain:
+                  type: string
+                  examples: [tunegocio.com]
+      responses:
+        '200':
+          description: Resultado vigente para la consulta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainCheck'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          description: Límite de consultas alcanzado
+  /quotes:
+    post:
+      operationId: createQuote
+      summary: Calcula alta, renovación, extras e impuestos antes del pago
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuoteRequest'
+      responses:
+        '201':
+          description: Cotización creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /orders:
+    post:
+      operationId: createOrder
+      summary: Crea una orden idempotente después de confirmar la cotización
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [quote_id, customer]
+              properties:
+                quote_id:
+                  type: string
+                customer:
+                  $ref: '#/components/schemas/Customer'
+      responses:
+        '202':
+          description: Orden aceptada para procesamiento
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '409':
+          description: La cotización o disponibilidad cambió
+  /orders/{order_id}:
+    get:
+      operationId: getOrder
+      summary: Devuelve el estado de pago y aprovisionamiento
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Estado actual
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Orden no encontrada
+components:
+  responses:
+    ValidationError:
+      description: Datos inválidos
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [code, message]
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+              fields:
+                type: object
+                additionalProperties:
+                  type: string
+  schemas:
+    Money:
+      type: object
+      required: [amount, currency]
+      properties:
+        amount:
+          type: string
+          pattern: '^\\d+\\.\\d{2}$'
+        currency:
+          type: string
+          const: USD
+    HostingPlan:
+      type: object
+      required: [id, name, headline, signup_price, renewal_price, features]
+      properties:
+        id:
+          type: string
+          enum: [start, grow, scale]
+        name:
+          type: string
+        headline:
+          type: string
+        signup_price:
+          $ref: '#/components/schemas/Money'
+        renewal_price:
+          $ref: '#/components/schemas/Money'
+        features:
+          type: array
+          items:
+            type: string
+    DomainCheck:
+      type: object
+      required: [domain, status, checked_at]
+      properties:
+        domain:
+          type: string
+        status:
+          type: string
+          enum: [available, unavailable, premium, unsupported, unknown]
+        registration_price:
+          oneOf:
+            - $ref: '#/components/schemas/Money'
+            - type: 'null'
+        renewal_price:
+          oneOf:
+            - $ref: '#/components/schemas/Money'
+            - type: 'null'
+        checked_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+    QuoteRequest:
+      type: object
+      required: [plan_id, domain_mode]
+      properties:
+        plan_id:
+          type: string
+        domain_mode:
+          type: string
+          enum: [register, existing, later]
+        domain:
+          type: [string, 'null']
+        extras:
+          type: array
+          items:
+            type: string
+    Quote:
+      type: object
+      required: [id, currency, subtotal, tax, total, renewal_total, expires_at]
+      properties:
+        id:
+          type: string
+        currency:
+          type: string
+          const: USD
+        subtotal:
+          $ref: '#/components/schemas/Money'
+        tax:
+          $ref: '#/components/schemas/Money'
+        total:
+          $ref: '#/components/schemas/Money'
+        renewal_total:
+          $ref: '#/components/schemas/Money'
+        expires_at:
+          type: string
+          format: date-time
+    Customer:
+      type: object
+      required: [name, email, country]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        country:
+          type: string
+          const: EC
+        tax_id:
+          type: [string, 'null']
+    Order:
+      type: object
+      required: [id, status, payment_status, provisioning_status]
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum: [pending, processing, active, action_required, failed, cancelled]
+        payment_status:
+          type: string
+          enum: [pending, authorized, paid, rejected, refunded]
+        provisioning_status:
+          type: string
+          enum: [not_started, queued, running, partial, completed, failed]

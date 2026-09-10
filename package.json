@@ -1,0 +1,13 @@
+{
+  "name": "suprohosting-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Frontend WordPress y prototipo navegable de SuproHosting",
+  "scripts": {
+    "build:preview": "node scripts/build-preview.mjs",
+    "check": "node --check wordpress/wp-content/themes/suprohosting-front/assets/js/supro-front.js && node scripts/validate-frontend.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prototipo interactivo del nuevo frontend de SuproHosting">
+  <title>SuproHosting — Frontend V2.1</title>
+  <link rel="icon" href="assets/icon-suprohosting.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/supro-front.css">
+</head>
+<body class="supro-front-active">
+<a class="supro-skip-link" href="#contenido">Saltar al contenido</a>
+<div class="supro-announcement"><div class="supro-container supro-announcement__inner"><p><span aria-hidden="true"></span>Infraestructura propia · soporte real desde Ecuador</p><a href="https://wa.me/593968279747">Hablar con soporte <span aria-hidden="true">↗</span></a></div></div>
+<header class="supro-header" data-header>
+  <div class="supro-container supro-header__inner">
+    <a class="supro-brand" href="#contenido" aria-label="Inicio — SuproHosting"><img src="assets/logo-suprohosting.png" alt="SuproHosting" width="230" height="100"></a>
+    <button class="supro-menu-toggle" type="button" aria-expanded="false" aria-controls="supro-primary-nav" data-menu-toggle><span class="screen-reader-text">Abrir menú</span><span></span><span></span><span></span></button>
+    <nav id="supro-primary-nav" class="supro-nav" aria-label="Navegación principal" data-menu>
+      <a href="#hosting">Hosting</a><a href="#dominios">Dominios</a><a href="#correo">Correo</a><a href="#vps">VPS</a><a href="#ingenieria">Ingeniería</a><a class="supro-nav__login" href="#portal-demo" data-open-portal>Acceder</a><a class="supro-button supro-button--small" href="#hosting">Elegir hosting</a>
+    </nav>
+  </div>
+</header>
+<svg class="supro-icon-sprite" aria-hidden="true" focusable="false">
+	<symbol id="supro-i-server" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01M11 6.5h6M11 17.5h6"/></symbol>
+	<symbol id="supro-i-headset" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M18 19c0 1.1-.9 2-2 2h-4"/><rect x="2" y="13" width="4" height="6" rx="2"/><rect x="18" y="13" width="4" height="6" rx="2"/></symbol>
+	<symbol id="supro-i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+	<symbol id="supro-i-shield" viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6l8-3Z"/><path d="m9 12 2 2 4-5"/></symbol>
+	<symbol id="supro-i-domain" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.2 2.5 3.3 5.5 3.3 9S14.2 18.5 12 21M12 3c-2.2 2.5-3.3 5.5-3.3 9S9.8 18.5 12 21"/></symbol>
+	<symbol id="supro-i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+	<symbol id="supro-i-cloud" viewBox="0 0 24 24"><path d="M7 18h11a4 4 0 0 0 .5-8A7 7 0 0 0 5 9.5 4.5 4.5 0 0 0 7 18Z"/><path d="m10 15 2-2 2 2M12 13v6"/></symbol>
+	<symbol id="supro-i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.3 10h10.8l2-7H6"/><circle cx="9" cy="19" r="1.5"/><circle cx="18" cy="19" r="1.5"/></symbol>
+	<symbol id="supro-i-erp" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 8h8M8 12h3M14 12h2M8 16h3M14 16h2"/></symbol>
+	<symbol id="supro-i-camera" viewBox="0 0 24 24"><path d="M4 7h11a2 2 0 0 1 2 2v7H4V7Z"/><path d="m17 11 4-2v7l-4-2M8 20h5M10.5 16v4"/></symbol>
+	<symbol id="supro-i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+	<symbol id="supro-i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+	<symbol id="supro-i-speed" viewBox="0 0 24 24"><path d="M4 18a9 9 0 1 1 16 0"/><path d="m12 14 4-5"/><circle cx="12" cy="15" r="2"/></symbol>
+	<symbol id="supro-i-backup" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2-5.3"/><path d="M4 4v5h5"/><path d="M12 8v4l3 2"/></symbol>
+	<symbol id="supro-i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol>
+	<symbol id="supro-i-support" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m5.6 5.6 3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></symbol>
+</svg>
+
+<main id="contenido" class="supro-main">
+	<section class="supro-hero-v2" aria-labelledby="hero-title">
+		<div class="supro-hero-v2__orb supro-hero-v2__orb--one" aria-hidden="true"></div>
+		<div class="supro-hero-v2__orb supro-hero-v2__orb--two" aria-hidden="true"></div>
+		<div class="supro-container supro-hero-v2__grid">
+			<div class="supro-hero-v2__copy" data-reveal>
+				<p class="supro-eyebrow"><span></span>Hosting ecuatoriano, de verdad</p>
+				<h1 id="hero-title">Tu negocio en línea. <em>Nuestra infraestructura detrás.</em></h1>
+				<p class="supro-hero-v2__lead">Hosting administrado sobre infraestructura propia, con soporte real en español y factura ecuatoriana.</p>
+				<div class="supro-actions">
+					<a class="supro-button supro-button--lime" href="#hosting">Elegir mi hosting <span aria-hidden="true">→</span></a>
+					<a class="supro-text-link supro-text-link--light" href="#dominios">Ya tengo un dominio <span aria-hidden="true">↓</span></a>
+				</div>
+				<ul class="supro-hero-v2__proof" aria-label="Ventajas SuproHosting">
+					<li><span>01</span>Proxmox propio</li>
+					<li><span>02</span>Correo iRedMail</li>
+					<li><span>03</span>Equipo local</li>
+				</ul>
+			</div>
+
+			<div class="supro-hero-scene" data-reveal>
+				<div class="supro-hero-scene__photo">
+					<img src="assets/datacenter-technician.webp" alt="Técnico trabajando en infraestructura de centro de datos">
+					<div class="supro-hero-scene__shade"></div>
+					<div class="supro-hero-scene__top"><span><i></i>Infraestructura operativa</span><b>En línea</b></div>
+					<div class="supro-hero-scene__caption"><small>Administrado por SuproHosting</small><strong>Control local. Alcance global.</strong></div>
+				</div>
+				<article class="supro-float-card supro-float-card--mail"><svg><use href="#supro-i-mail"></use></svg><div><small>Correo propio</small><strong>iRedMail</strong></div><span>✓</span></article>
+				<article class="supro-float-card supro-float-card--server"><svg><use href="#supro-i-server"></use></svg><div><small>Virtualización</small><strong>Proxmox</strong></div><span>✓</span></article>
+				<div class="supro-route-dot supro-route-dot--a" aria-hidden="true"></div><div class="supro-route-dot supro-route-dot--b" aria-hidden="true"></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="supro-reasons" aria-label="Razones para elegir SuproHosting">
+		<div class="supro-container supro-reasons__grid">
+			<article data-reveal><span class="supro-icon-box supro-icon-box--blue"><svg><use href="#supro-i-server"></use></svg></span><div><small>01 · Control</small><h2>Infraestructura que conocemos</h2><p>Operamos la base tecnológica y respondemos por ella.</p></div></article>
+			<article data-reveal><span class="supro-icon-box supro-icon-box--green"><svg><use href="#supro-i-headset"></use></svg></span><div><small>02 · Cercanía</small><h2>Soporte que sí conversa</h2><p>Personas en español, con contexto de tu negocio.</p></div></article>
+			<article data-reveal><span class="supro-icon-box supro-icon-box--amber"><svg><use href="#supro-i-receipt"></use></svg></span><div><small>03 · Confianza</small><h2>Factura en Ecuador</h2><p>Contratación clara y respaldo comercial local.</p></div></article>
+		</div>
+	</section>
+
+	<section class="supro-section supro-hosting" id="hosting" aria-labelledby="hosting-title">
+		<div class="supro-container">
+			<div class="supro-hosting__head">
+				<div class="supro-section-heading" data-reveal>
+					<p class="supro-kicker">El punto de partida</p>
+					<h2 id="hosting-title">Una base sólida para cada etapa.</h2>
+					<p>Elige según el momento de tu proyecto. Conectarás dominio, correo y extras en el siguiente paso.</p>
+				</div>
+				<div class="supro-carousel-nav" aria-label="Controles de planes"><button type="button" data-carousel-prev="plans" aria-label="Plan anterior">←</button><button type="button" data-carousel-next="plans" aria-label="Plan siguiente">→</button></div>
+			</div>
+
+			<div class="supro-plan-carousel owl-carousel" data-carousel="plans">
+				<article class="supro-plan-v2">
+					<div class="supro-plan-v2__top"><p>START</p><span>01</span></div>
+					<h3>Presencia</h3>
+					<p class="supro-plan-v2__promise">Para lanzar tu primera web profesional con una base segura.</p>
+					<div class="supro-plan-v2__price"><strong>Cotización automática</strong><small>Alta y renovación visibles antes de pagar</small></div>
+					<ul><li>Un proyecto web</li><li>SSL y respaldos incluidos</li><li>Dominio elegible el primer año</li><li>Soporte de puesta en marcha</li></ul>
+					<button class="supro-button supro-button--outline" type="button" data-start-flow data-plan="Hosting START">Configurar START <span>→</span></button>
+				</article>
+
+				<article class="supro-plan-v2 supro-plan-v2--featured">
+					<span class="supro-plan-v2__badge">Más elegido</span>
+					<div class="supro-plan-v2__top"><p>GROW</p><span>02</span></div>
+					<h3>Negocio</h3>
+					<p class="supro-plan-v2__promise">Para crecer, vender y trabajar con más capacidad.</p>
+					<div class="supro-plan-v2__price"><strong>Cotización automática</strong><small>Alta y renovación visibles antes de pagar</small></div>
+					<ul><li>Sitios y tienda en línea</li><li>Más recursos y rendimiento</li><li>Migración asistida</li><li>Monitoreo y soporte prioritario</li></ul>
+					<button class="supro-button supro-button--lime" type="button" data-start-flow data-plan="Hosting GROW">Configurar GROW <span>→</span></button>
+				</article>
+
+				<article class="supro-plan-v2">
+					<div class="supro-plan-v2__top"><p>SCALE</p><span>03</span></div>
+					<h3>Operación</h3>
+					<p class="supro-plan-v2__promise">Para aplicaciones y operaciones que no pueden detenerse.</p>
+					<div class="supro-plan-v2__price"><strong>Diseño a tu medida</strong><small>Alcance y renovación documentados</small></div>
+					<ul><li>Recursos dedicados</li><li>Arquitectura administrada</li><li>Continuidad y recuperación</li><li>Acompañamiento de ingeniería</li></ul>
+					<button class="supro-button supro-button--outline" type="button" data-start-flow data-plan="Hosting SCALE">Diseñar SCALE <span>→</span></button>
+				</article>
+			</div>
+			<p class="supro-catalog-note"><span>i</span>Las capacidades y los precios definitivos se sincronizarán con el catálogo comercial; no se han inventado valores en este prototipo.</p>
+		</div>
+	</section>
+
+	<section class="supro-domain-stage" id="dominios" aria-labelledby="domain-title">
+		<div class="supro-domain-stage__grid" aria-hidden="true"></div>
+		<div class="supro-container supro-domain-stage__layout">
+			<div class="supro-domain-stage__copy" data-reveal>
+				<p class="supro-kicker supro-kicker--light">Conecta tu nombre</p>
+				<h2 id="domain-title">¿Tu hosting necesita dominio?</h2>
+				<p>Busca el nombre, revisa alternativas y conéctalo al plan que elijas. Si ya tienes uno, lo configuramos contigo.</p>
+				<div class="supro-domain-perks"><span><svg><use href="#supro-i-domain"></use></svg>Búsqueda simple</span><span><svg><use href="#supro-i-shield"></use></svg>DNS protegido</span><span><svg><use href="#supro-i-headset"></use></svg>Conexión asistida</span></div>
+			</div>
+			<div class="supro-domain-console" data-reveal>
+				<div class="supro-domain-console__bar"><span></span><span></span><span></span><p>Buscador de dominios</p></div>
+				<div class="supro-domain-console__body">
+					<form class="supro-domain-form" data-domain-search data-domain-mode="demo" novalidate>
+  <label class="screen-reader-text" for="supro-domain-name">Nombre de dominio</label>
+  <div class="supro-domain-input-wrap"><span aria-hidden="true">www.</span><input id="supro-domain-name" name="domain" type="text" inputmode="url" autocomplete="off" placeholder="tunegocio.com" required></div>
+  <button class="supro-button supro-button--accent" type="submit">Buscar dominio</button>
+</form><div class="supro-domain-result" data-domain-result role="status" aria-live="polite"></div><p class="supro-prototype-note"><span aria-hidden="true">●</span> Vista de demostración. En WordPress, instala Dominion para consultar disponibilidad mediante WHOIS.</p>
+					<div class="supro-tld-strip" aria-label="Extensiones sugeridas"><span>.com</span><span>.net</span><span>.org</span><span>.ec</span><span>.com.ec</span></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="supro-section supro-email" id="correo" aria-labelledby="email-title">
+		<div class="supro-container supro-email__grid">
+			<div class="supro-email__visual" data-reveal>
+				<img src="assets/business-owner.webp" alt="Profesional trabajando con sus canales digitales">
+				<div class="supro-email__message"><span class="supro-icon-box supro-icon-box--green"><svg><use href="#supro-i-mail"></use></svg></span><div><small>Mensaje entregado</small><strong>ventas@tuempresa.com</strong></div><i>✓</i></div>
+				<div class="supro-email__stamp"><b>SPF</b><b>DKIM</b><b>DMARC</b></div>
+			</div>
+			<div class="supro-email__content" data-reveal>
+				<p class="supro-kicker">Correo corporativo</p>
+				<h2 id="email-title">Que cada mensaje hable bien de tu empresa.</h2>
+				<p>Cuentas con tu dominio, administradas sobre nuestro servidor iRedMail y configuradas por personas.</p>
+				<div class="supro-email__bento">
+					<article><span>01</span><h3>Tu propia identidad</h3><p>Correos con el nombre de tu empresa.</p></article>
+					<article class="is-blue"><span>02</span><h3>Entrega protegida</h3><p>Autenticación, antispam y buenas prácticas.</p></article>
+					<article class="is-wide"><span>03</span><h3>Migración acompañada</h3><p>Movemos tus cuentas y te ayudamos a configurar los equipos.</p></article>
+				</div>
+				<button class="supro-button supro-button--dark" type="button" data-start-flow data-plan="Correo Corporativo">Configurar mi correo <span>→</span></button>
+			</div>
+		</div>
+	</section>
+
+	<section class="supro-vps" id="vps" aria-labelledby="vps-title">
+		<div class="supro-vps__glow" aria-hidden="true"></div>
+		<div class="supro-container">
+			<div class="supro-vps__head">
+				<div class="supro-section-heading" data-reveal><p class="supro-kicker supro-kicker--light">VPS sobre Proxmox</p><h2 id="vps-title">Más control para lo que hace funcionar tu negocio.</h2><p>Servidores virtuales dimensionados por caso de uso, con administración local cuando la necesitas.</p></div>
+				<div class="supro-carousel-nav supro-carousel-nav--dark"><button type="button" data-carousel-prev="vps" aria-label="Caso anterior">←</button><button type="button" data-carousel-next="vps" aria-label="Caso siguiente">→</button></div>
+			</div>
+			<div class="supro-vps-carousel owl-carousel" data-carousel="vps">
+				<article class="supro-use-card supro-use-card--cyan"><span class="supro-use-card__number">01</span><svg><use href="#supro-i-cart"></use></svg><p>Comercio</p><h3>Tiendas y WooCommerce</h3><span class="supro-use-card__link">Rendimiento para vender ↗</span></article>
+				<article class="supro-use-card supro-use-card--lime"><span class="supro-use-card__number">02</span><svg><use href="#supro-i-erp"></use></svg><p>Operación</p><h3>Odoo, ERP y facturación</h3><span class="supro-use-card__link">Continuidad para operar ↗</span></article>
+				<article class="supro-use-card supro-use-card--amber"><span class="supro-use-card__number">03</span><svg><use href="#supro-i-camera"></use></svg><p>Seguridad</p><h3>Video y control de acceso</h3><span class="supro-use-card__link">Datos siempre disponibles ↗</span></article>
+				<article class="supro-use-card supro-use-card--blue"><span class="supro-use-card__number">04</span><svg><use href="#supro-i-code"></use></svg><p>Desarrollo</p><h3>Pruebas y aplicaciones</h3><span class="supro-use-card__link">Entornos bajo control ↗</span></article>
+			</div>
+			<div class="supro-vps__footer"><p>¿No sabes cuánto necesitas? Te ayudamos a dimensionarlo.</p><button class="supro-button supro-button--ghost-light" type="button" data-start-flow data-plan="VPS administrado">Configurar un VPS <span>→</span></button></div>
+		</div>
+	</section>
+
+	<section class="supro-section supro-journey" id="proceso" aria-labelledby="journey-title">
+		<div class="supro-container">
+			<div class="supro-section-heading supro-section-heading--center" data-reveal><p class="supro-kicker">Puesta en marcha guiada</p><h2 id="journey-title">De elegir a publicar, sin perderte.</h2><p>Un recorrido corto que conserva tus decisiones y deja la complejidad técnica detrás.</p></div>
+			<div class="supro-journey__line" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+			<ol class="supro-journey__steps">
+				<li data-reveal><span>01</span><div><small>Primero</small><h3>Elige</h3><p>Selecciona hosting, correo o VPS.</p></div></li>
+				<li data-reveal><span>02</span><div><small>Después</small><h3>Conecta</h3><p>Registra, transfiere o usa tu dominio.</p></div></li>
+				<li data-reveal><span>03</span><div><small>A tu manera</small><h3>Configura</h3><p>Añade correo, respaldo y soporte.</p></div></li>
+				<li data-reveal><span>04</span><div><small>Listo</small><h3>Publica</h3><p>Recibe accesos y administra todo.</p></div></li>
+			</ol>
+			<div class="supro-journey__action"><button class="supro-button" type="button" data-start-flow data-plan="Hosting GROW">Probar el recorrido <span>→</span></button><small>Demo visual: no genera órdenes ni cobros.</small></div>
+		</div>
+	</section>
+
+	<section class="supro-section supro-panel" id="panel" aria-labelledby="panel-title">
+		<div class="supro-container">
+			<div class="supro-panel__intro" data-reveal><div><p class="supro-kicker">Panel Supro</p><h2 id="panel-title">Todo lo importante, sin ruido.</h2></div><p>Servicios, dominios, correo, facturas y soporte en una vista clara; los accesos técnicos siguen disponibles cuando hacen falta.</p></div>
+			<div class="supro-panel__showcase">
+				<div class="supro-dashboard" data-reveal>
+					<aside><img src="assets/icon-suprohosting.svg" alt=""><span class="is-active"><svg><use href="#supro-i-grid"></use></svg></span><span><svg><use href="#supro-i-server"></use></svg></span><span><svg><use href="#supro-i-domain"></use></svg></span><span><svg><use href="#supro-i-mail"></use></svg></span></aside>
+					<div class="supro-dashboard__main">
+						<header><div><small>Buenos días</small><strong>Tu operación está saludable</strong></div><span>JS</span></header>
+						<div class="supro-dashboard__metrics"><article><small>Servicios</small><b>03</b><i>+1</i></article><article><small>Estado</small><b>OK</b><i>✓</i></article><article><small>Por pagar</small><b>$0</b><i>✓</i></article></div>
+						<div class="supro-dashboard__service"><div class="supro-dashboard__service-head"><span>S</span><div><small>Hosting GROW</small><strong>suprohosting.com</strong></div><i>Activo</i></div><div class="supro-dashboard__bars"><span>Almacenamiento <b>42%</b></span><em><i style="width:42%"></i></em><span>Transferencia <b>28%</b></span><em><i style="width:28%"></i></em></div></div>
+					</div>
+				</div>
+				<div class="supro-panel-bento" data-reveal>
+					<article class="is-large"><svg><use href="#supro-i-grid"></use></svg><span>01</span><h3>Servicios</h3><p>Estado, consumo y accesos.</p></article>
+					<article><svg><use href="#supro-i-domain"></use></svg><span>02</span><h3>Dominios</h3></article>
+					<article class="is-green"><svg><use href="#supro-i-mail"></use></svg><span>03</span><h3>Correo</h3></article>
+					<article><svg><use href="#supro-i-receipt"></use></svg><span>04</span><h3>Facturas</h3></article>
+					<article class="is-dark"><svg><use href="#supro-i-support"></use></svg><span>05</span><h3>Soporte</h3></article>
+					<article class="is-wide"><svg><use href="#supro-i-speed"></use></svg><span>06</span><h3>Salud y métricas</h3></article>
+				</div>
+			</div>
+			<div class="supro-panel__action"><button class="supro-button supro-button--dark" type="button" data-open-portal>Abrir demo del panel <span>↗</span></button></div>
+		</div>
+	</section>
+
+	<section class="supro-engineering" id="ingenieria" aria-labelledby="engineering-title">
+		<div class="supro-container supro-engineering__grid">
+			<div class="supro-engineering__photos" data-reveal>
+				<div class="supro-engineering__photo supro-engineering__photo--main"><img src="assets/onsite-technician.webp" alt="Especialista de Supro trabajando en sitio"><span>Capacidad en sitio</span></div>
+				<div class="supro-engineering__photo supro-engineering__photo--small"><img src="assets/network-rack.webp" alt="Infraestructura de red"><span>Red e infraestructura</span></div>
+				<div class="supro-engineering__mark">SH<span>+</span></div>
+			</div>
+			<div class="supro-engineering__copy" data-reveal>
+				<p class="supro-kicker supro-kicker--amber">Ingeniería Supro</p>
+				<h2 id="engineering-title">Cuando tu proyecto supera un plan.</h2>
+				<p>Diseñamos, conectamos y protegemos soluciones que mezclan nube, infraestructura física y software.</p>
+				<div class="supro-engineering__list"><article><span>01</span><div><h3>Infraestructura y redes</h3><p>Servidores, virtualización, conectividad y continuidad.</p></div></article><article><span>02</span><div><h3>Software y automatización</h3><p>Portales, integraciones y procesos conectados.</p></div></article><article><span>03</span><div><h3>Seguridad y proyectos smart</h3><p>Protección, video, accesos y monitoreo.</p></div></article></div>
+				<a class="supro-button supro-button--amber" href="https://wa.me/593968279747" rel="noopener">Cotizar con un especialista <span>↗</span></a>
+			</div>
+		</div>
+	</section>
+
+	<section class="supro-section supro-stories" aria-labelledby="stories-title">
+		<div class="supro-container">
+			<div class="supro-stories__head"><div class="supro-section-heading" data-reveal><p class="supro-kicker">Resultados que se sienten</p><h2 id="stories-title">Negocios que ya avanzan con Supro.</h2></div><div class="supro-carousel-nav"><button type="button" data-carousel-prev="stories" aria-label="Testimonio anterior">←</button><button type="button" data-carousel-next="stories" aria-label="Testimonio siguiente">→</button></div></div>
+			<div class="supro-stories-carousel owl-carousel" data-carousel="stories">
+				<blockquote class="supro-story"><span class="supro-story__quote">“</span><p>Lo que más valoramos es que no solo nos ofrecieron un servicio, sino una solución pensada para nuestro negocio. Hoy contamos con una plataforma más seria, comunicación más ordenada y una presencia digital que transmite confianza.</p><footer><span>WP</span><div><strong>William’s Private Services</strong><small>Brooklyn, New York</small></div></footer></blockquote>
+				<blockquote class="supro-story supro-story--blue"><span class="supro-story__quote">“</span><p>Como marca de estética y nutrición, necesitábamos una presencia digital que transmitiera confianza, elegancia y profesionalismo. SuproHosting nos ayudó a estructurar mejor nuestra imagen online y presentar nuestros servicios de una forma más clara.</p><footer><span>NL</span><div><strong>Nutriesthetic LV</strong><small>Guayaquil, Ecuador</small></div></footer></blockquote>
+				<blockquote class="supro-story supro-story--green"><span class="supro-story__quote">“</span><p>Recomiendo SuproHosting a profesionales, arquitectos y empresas constructoras que quieren verse más sólidos en internet y convertir su presencia digital en una herramienta comercial real.</p><footer><span>JA</span><div><strong>Arq. Jaime Ayaica</strong><small>Construcciones Inmobiliarias</small></div></footer></blockquote>
+			</div>
+		</div>
+	</section>
+
+	<section class="supro-section supro-faq" id="preguntas" aria-labelledby="faq-title">
+		<div class="supro-container supro-faq__grid">
+			<div class="supro-faq__intro" data-reveal><p class="supro-kicker">Respuestas claras</p><h2 id="faq-title">Antes de comenzar.</h2><p>Si tu caso es distinto, el equipo lo revisa contigo antes de contratar.</p><a class="supro-text-link" href="https://wa.me/593968279747" rel="noopener">Hacer otra pregunta <span>↗</span></a></div>
+			<div class="supro-accordion" data-reveal>
+				<details open><summary>¿Qué significa que la infraestructura sea propia?<span></span></summary><p>Que SuproHosting administra directamente su entorno de virtualización Proxmox y toma responsabilidad operativa sobre el servicio.</p></details>
+				<details><summary>¿El soporte está en Ecuador?<span></span></summary><p>Sí. Recibes atención en español y acompañamiento comercial y técnico local.</p></details>
+				<details><summary>¿Puedo migrar mi sitio actual?<span></span></summary><p>Sí. Revisamos el origen, preparamos la migración y validamos el funcionamiento antes del cambio final.</p></details>
+				<details><summary>¿El dominio viene incluido?<span></span></summary><p>La propuesta contempla un dominio elegible durante el primer año en planes seleccionados. La extensión y la renovación se mostrarán antes del pago.</p></details>
+				<details><summary>¿Puedo usar un dominio que ya tengo?<span></span></summary><p>Sí. Puedes mantenerlo con tu proveedor y apuntarlo al hosting, o solicitar ayuda para transferirlo cuando aplique.</p></details>
+				<details><summary>¿Cómo se comprueba la disponibilidad del dominio?<span></span></summary><p>El buscador realiza una consulta inicial; disponibilidad y precio se vuelven a confirmar antes de registrar.</p></details>
+				<details><summary>¿El correo usa mi propio dominio?<span></span></summary><p>Sí. Las cuentas se crean con el dominio de tu empresa y se configuran con autenticación y protección antispam.</p></details>
+				<details><summary>¿Cuándo necesito un VPS?<span></span></summary><p>Cuando una tienda, ERP, aplicación o sistema necesita recursos aislados, mayor control o una configuración especial.</p></details>
+				<details><summary>¿Recibo factura ecuatoriana?<span></span></summary><p>Sí. La contratación se realiza con respaldo comercial local y emisión de factura en Ecuador.</p></details>
+				<details><summary>¿Dónde administro mis servicios?<span></span></summary><p>En el portal del cliente podrás revisar servicios, dominios, correo, facturas y solicitudes de soporte.</p></details>
+			</div>
+		</div>
+	</section>
+</main>
+
+<div class="supro-modal supro-modal--flow" data-flow-modal hidden>
+	<div class="supro-modal__backdrop" data-close-flow></div>
+	<section class="supro-flow" role="dialog" aria-modal="true" aria-labelledby="flow-title" tabindex="-1">
+		<header class="supro-flow__head">
+			<div><p>Configurador Supro</p><h2 id="flow-title">Prepara tu servicio</h2></div>
+			<button class="supro-icon-button" type="button" data-close-flow aria-label="Cerrar configurador">×</button>
+		</header>
+		<ol class="supro-flow__steps" aria-label="Pasos del configurador">
+			<li class="is-active" data-step-indicator="1"><span>1</span><small>Elige</small></li>
+			<li data-step-indicator="2"><span>2</span><small>Conecta</small></li>
+			<li data-step-indicator="3"><span>3</span><small>Configura</small></li>
+			<li data-step-indicator="4"><span>4</span><small>Publica</small></li>
+		</ol>
+		<div class="supro-flow__body">
+			<section class="supro-flow-panel is-active" data-flow-step="1">
+				<div class="supro-flow-panel__title"><span>01</span><div><h3>Confirma tu punto de partida</h3><p>Puedes cambiar de opción sin perder el resto del recorrido.</p></div></div>
+				<div class="supro-selected-product"><span class="supro-icon-box supro-icon-box--blue"><svg><use href="#supro-i-server"></use></svg></span><div><small>Servicio seleccionado</small><strong data-selected-plan>Hosting GROW</strong></div><i>✓</i></div>
+				<fieldset class="supro-flow-options"><legend>Otras opciones</legend><label><input type="radio" name="flow-plan" value="Hosting START"><span><b>START</b><small>Para comenzar</small></span></label><label><input type="radio" name="flow-plan" value="Hosting GROW"><span><b>GROW</b><small>Para crecer</small></span></label><label><input type="radio" name="flow-plan" value="Hosting SCALE"><span><b>SCALE</b><small>Para escalar</small></span></label></fieldset>
+			</section>
+
+			<section class="supro-flow-panel" data-flow-step="2" hidden>
+				<div class="supro-flow-panel__title"><span>02</span><div><h3>Conecta tu dominio</h3><p>Elige la ruta que corresponde a tu proyecto.</p></div></div>
+				<fieldset class="supro-path-options"><legend class="screen-reader-text">Opciones de dominio</legend><label><input type="radio" name="domain-path" value="register" checked><span><svg><use href="#supro-i-domain"></use></svg><b>Quiero registrar uno</b><small>Confirmaremos precio y disponibilidad.</small></span></label><label><input type="radio" name="domain-path" value="existing"><span><svg><use href="#supro-i-cloud"></use></svg><b>Ya tengo dominio</b><small>Te ayudamos a conectarlo.</small></span></label><label><input type="radio" name="domain-path" value="later"><span><svg><use href="#supro-i-backup"></use></svg><b>Lo haré después</b><small>Continúa sin bloquear el alta.</small></span></label></fieldset>
+				<label class="supro-field"><span>Dominio</span><input name="flow-domain" type="text" placeholder="tunegocio.com" autocomplete="off"><small>En producción se validará en tiempo real antes de cobrar.</small></label>
+			</section>
+
+			<section class="supro-flow-panel" data-flow-step="3" hidden>
+				<div class="supro-flow-panel__title"><span>03</span><div><h3>Configura lo esencial</h3><p>Solo pedimos los datos necesarios para preparar la orden.</p></div></div>
+				<div class="supro-flow-form"><label class="supro-field"><span>Nombre o empresa</span><input name="customer-name" type="text" placeholder="Tu empresa"></label><label class="supro-field"><span>Correo de contacto</span><input name="customer-email" type="email" placeholder="hola@tuempresa.com"></label></div>
+				<fieldset class="supro-extra-options"><legend>Añade acompañamiento</legend><label><input type="checkbox" name="extra" value="Correo corporativo"><span><svg><use href="#supro-i-mail"></use></svg><b>Correo corporativo</b><small>Con tu dominio</small></span></label><label><input type="checkbox" name="extra" value="Migración asistida"><span><svg><use href="#supro-i-backup"></use></svg><b>Migración asistida</b><small>Nos encargamos del traslado</small></span></label><label><input type="checkbox" name="extra" value="Soporte prioritario"><span><svg><use href="#supro-i-headset"></use></svg><b>Soporte prioritario</b><small>Acompañamiento ampliado</small></span></label></fieldset>
+				<div class="supro-payment-note"><svg><use href="#supro-i-lock"></use></svg><div><strong>Pago seguro en la siguiente fase</strong><p>Este prototipo no solicita datos de tarjeta. En producción verás total, impuestos y renovación antes de confirmar.</p></div></div>
+			</section>
+
+			<section class="supro-flow-panel" data-flow-step="4" hidden>
+				<div class="supro-review" data-review-state>
+					<div class="supro-flow-panel__title"><span>04</span><div><h3>Revisa y publica</h3><p>Así se verá el resumen antes de entrar al pago real.</p></div></div>
+					<dl><div><dt>Servicio</dt><dd data-review-plan>Hosting GROW</dd></div><div><dt>Dominio</dt><dd data-review-domain>Por definir</dd></div><div><dt>Extras</dt><dd data-review-extras>Sin extras</dd></div><div><dt>Precio y renovación</dt><dd>Se mostrarán antes de pagar</dd></div></dl>
+					<div class="supro-review__assurance"><span>✓</span>Factura ecuatoriana y soporte local incluidos en la experiencia.</div>
+				</div>
+				<div class="supro-activation" data-activation-state hidden><span class="supro-activation__icon" data-activation-icon>↻</span><h3 data-activation-title>Preparando tu servicio…</h3><p data-activation-copy>Esta animación representa el pago y el aprovisionamiento automático.</p><div class="supro-activation__bar"><span data-activation-progress></span></div><ul><li class="is-done">Orden validada</li><li data-activation-item>Configurando infraestructura</li><li data-activation-item>Creando accesos</li></ul></div>
+			</section>
+		</div>
+		<footer class="supro-flow__footer"><button class="supro-button supro-button--text" type="button" data-flow-back hidden>← Atrás</button><p>Prototipo de interacción · sin cobros</p><button class="supro-button" type="button" data-flow-next>Continuar →</button></footer>
+	</section>
+</div>
+
+<div class="supro-modal supro-modal--portal" id="portal-demo" data-portal-modal hidden>
+	<div class="supro-modal__backdrop" data-close-portal></div>
+	<section class="supro-portal" role="dialog" aria-modal="true" aria-labelledby="portal-modal-title" tabindex="-1">
+		<aside class="supro-portal__side">
+			<img src="assets/icon-suprohosting.svg" alt="SuproHosting">
+			<nav aria-label="Portal del cliente"><button class="is-active"><svg><use href="#supro-i-grid"></use></svg>Resumen</button><button><svg><use href="#supro-i-server"></use></svg>Servicios</button><button><svg><use href="#supro-i-domain"></use></svg>Dominios</button><button><svg><use href="#supro-i-mail"></use></svg>Correo</button><button><svg><use href="#supro-i-receipt"></use></svg>Facturas</button><button><svg><use href="#supro-i-support"></use></svg>Soporte</button></nav>
+			<p>Demo visual V2.1</p>
+		</aside>
+		<div class="supro-portal__main">
+			<header><div><small>Portal del cliente</small><h2 id="portal-modal-title">Tu infraestructura</h2></div><div><span class="supro-portal__help">¿Necesitas ayuda?</span><span class="supro-portal__avatar">JS</span><button class="supro-icon-button" type="button" data-close-portal aria-label="Cerrar portal">×</button></div></header>
+			<div class="supro-portal__welcome"><div><p>Buenos días</p><span>Todos tus servicios están operativos.</span></div><span class="supro-chip supro-chip--success"><i></i>Sistema saludable</span></div>
+			<div class="supro-portal__metrics"><article><svg><use href="#supro-i-server"></use></svg><div><small>Servicios activos</small><strong>03</strong></div></article><article><svg><use href="#supro-i-domain"></use></svg><div><small>Dominios</small><strong>02</strong></div></article><article><svg><use href="#supro-i-receipt"></use></svg><div><small>Facturas pendientes</small><strong>$0,00</strong></div></article><article><svg><use href="#supro-i-speed"></use></svg><div><small>Estado</small><strong>OK</strong></div></article></div>
+			<div class="supro-portal__columns"><section><div class="supro-portal__section-head"><h3>Mis servicios</h3><button>Ver todos</button></div><article class="supro-portal__service"><div class="supro-portal__service-title"><span>S</span><div><small>Hosting GROW</small><strong>suprohosting.com</strong></div><i>Activo</i></div><div class="supro-portal__usage"><div><span>Almacenamiento</span><b>42%</b></div><div class="supro-progress"><span style="width:42%"></span></div><div><span>Transferencia</span><b>28%</b></div><div class="supro-progress"><span style="width:28%"></span></div></div><div class="supro-portal__service-actions"><button data-demo-action>Administrar hosting ↗</button><button data-demo-action>Abrir correo ↗</button></div></article></section><aside><div class="supro-portal__section-head"><h3>Actividad reciente</h3></div><ol class="supro-activity"><li><span>✓</span><div><strong>Backup completado</strong><small>Hoy, 03:15</small></div></li><li><span>↻</span><div><strong>SSL renovado</strong><small>Ayer, 22:40</small></div></li><li><span>▣</span><div><strong>Factura pagada</strong><small>2 sep, 10:12</small></div></li></ol></aside></div>
+		</div>
+	</section>
+</div>
+
+<div class="supro-toast" data-toast role="status" aria-live="polite" hidden></div>
+<footer class="supro-footer" id="soporte">
+  <div class="supro-container supro-footer__lead"><div><p class="supro-kicker">¿Listo para ponerlo en línea?</p><h2>Tu proyecto merece una base que responda.</h2></div><a class="supro-button supro-button--lime" href="#hosting">Elegir mi hosting <span aria-hidden="true">→</span></a></div>
+  <div class="supro-container supro-footer__grid">
+    <div class="supro-footer__brand"><a class="supro-brand" href="#contenido"><img src="assets/logo-suprohosting.png" alt="SuproHosting"></a><p>Infraestructura propia y acompañamiento local para transformar tu operación digital.</p></div>
+    <div><h3>Productos</h3><a href="#hosting">Hosting administrado</a><a href="#dominios">Dominios</a><a href="#correo">Correo corporativo</a><a href="#vps">Servidores VPS</a></div>
+    <div><h3>Capacidades</h3><a href="#ingenieria">Infraestructura</a><a href="#ingenieria">Desarrollo y automatización</a><a href="#ingenieria">Ciberseguridad</a><a href="#panel">Panel del cliente</a></div>
+    <div><h3>Contacto Ecuador</h3><a href="mailto:ventas@suprohosting.com">ventas@suprohosting.com</a><a href="https://wa.me/593968279747">+593 96 827 9747</a><span>Tulcán y Primero de Mayo #1006</span><a href="#preguntas">Preguntas frecuentes</a></div>
+  </div>
+  <div class="supro-container supro-footer__bottom"><p>© 2026 SuproHosting · PEDESTAL-TEK S.A.</p><p>Transformación digital sin límites</p></div>
+</footer>
+<script src="assets/supro-front.js"></script>
+</body>
+</html>
