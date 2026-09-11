@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.dirname(scriptDirectory);
-const themeRoot = path.join(projectRoot, 'wordpress/wp-content/themes/suprohosting-front');
+const themeRoot = path.join(projectRoot, 'wp-content/themes/suprohosting-front');
 const previewRoot = path.join(projectRoot, 'preview');
 const previewAssets = path.join(previewRoot, 'assets');
 

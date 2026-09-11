@@ -15,6 +15,8 @@ wp-content/cache/
 wp-content/upgrade/
 wp-content/backup*/
 wp-content/debug.log
+error_log
+error_log.*
 
 # Sistema y editores
 .DS_Store

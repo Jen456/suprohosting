@@ -1,0 +1,476 @@
+.thegem-hotspot-widget {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+
+.thegem-hotspot-image-wrap {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	vertical-align: middle;
+}
+
+.thegem-hotspot-image-wrap img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.thegem-hotspot-item {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+}
+
+/* Marker Animation - Entrance */
+.thegem-hotspot-item.thegem-hotspot-animated {
+	opacity: 0;
+	animation-fill-mode: both;
+	animation-duration: 0.6s;
+}
+
+.thegem-hotspot-item.thegem-hotspot-animation-fade.thegem-hotspot-visible {
+	animation-name: thegem-hotspot-fadeIn;
+	opacity: 1;
+}
+
+.thegem-hotspot-item.thegem-hotspot-animation-scale.thegem-hotspot-visible {
+	animation-name: thegem-hotspot-scaleIn;
+	opacity: 1;
+}
+
+@keyframes thegem-hotspot-fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes thegem-hotspot-scaleIn {
+	from { 
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.5);
+	}
+	to { 
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+/* Pulsating Effect */
+.thegem-hotspot-pulsating .thegem-hotspot-marker::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	height: 100%;
+	border-radius: inherit;
+	background-color: inherit;
+	transform: translate(-50%, -50%);
+	animation: thegem-hotspot-pulse 2s infinite;
+	z-index: -1;
+}
+
+@keyframes thegem-hotspot-pulse {
+	0% {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(2.5);
+	}
+}
+
+.thegem-hotspot-marker {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--styled-bg-color, #ffffff);
+	border-radius: 50%;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-sizing: border-box;
+	min-width: 20px;
+	min-height: 20px;
+	border: transparent 0 solid;
+}
+
+.thegem-hotspot-marker:empty {
+	border-radius: 50%;
+	padding: 0;
+}
+
+.thegem-hotspot-marker-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	color: inherit;
+}
+
+.thegem-hotspot-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.3s ease;
+	font-size: 10px;
+}
+
+.thegem-hotspot-icon i,
+.thegem-hotspot-icon svg {
+	transition: all 0.3s ease;
+	color: var(--thegem-to-link-color, inherit);
+	fill: var(--thegem-to-link-color, inherit);
+}
+
+.thegem-hotspot-label {
+	white-space: nowrap;
+	transition: color 0.3s ease;
+	margin: 0;
+}
+.thegem-hotspot-label.text-style-default {
+	font-family: var(--thegem-to-h6-font-family);
+	font-style: var(--thegem-to-h6-font-style);
+	font-weight: var(--thegem-to-h6-font-weight);
+	font-size: var(--thegem-to-body-font-size-small);
+	line-height: var(--thegem-to-body-line-height-small);
+	text-transform: none;
+	letter-spacing: 0;
+}
+.thegem-hotspot-label.text-style-default.bold {
+	font-weight: bold;
+}
+
+.thegem-hotspot-item.active {
+	z-index: 10;
+}
+.thegem-hotspot-item.active .thegem-hotspot-marker {
+	z-index: 11;
+}
+
+/* Tooltip Styles */
+.thegem-hotspot-tooltip {
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+	background: #333333cc;
+	color: #ffffff;
+	padding: 12px;
+	border-radius: 4px;
+	max-width: 200px;
+	z-index: 10;
+	transition: all 0.3s ease;
+	box-sizing: border-box;
+	pointer-events: none;
+	width: max-content;
+}
+
+.thegem-hotspot-tooltip::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+}
+
+/* Tooltip Positions */
+.thegem-hotspot-item.thegem-hotspot-position-top .thegem-hotspot-tooltip {
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-8px);
+}
+
+.thegem-hotspot-item.thegem-hotspot-position-top .thegem-hotspot-tooltip::before {
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	border-width: 6px 6px 0 6px;
+	border-color: #333333cc transparent transparent transparent;
+	z-index: 10;
+}
+
+.thegem-hotspot-item.thegem-hotspot-position-bottom .thegem-hotspot-tooltip {
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%) translateY(8px);
+}
+
+.thegem-hotspot-item.thegem-hotspot-position-bottom .thegem-hotspot-tooltip::before {
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	border-width: 0 6px 6px 6px;
+	border-color: transparent transparent #333333cc transparent;
+}
+
+.thegem-hotspot-item.thegem-hotspot-position-left .thegem-hotspot-tooltip {
+	right: 100%;
+	top: 50%;
+	transform: translateY(-50%) translateX(-8px);
+}
+
+.thegem-hotspot-item.thegem-hotspot-position-left .thegem-hotspot-tooltip::before {
+	left: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	border-width: 6px 0 6px 6px;
+	border-color: transparent transparent transparent #333333cc;
+}
+
+.thegem-hotspot-item.thegem-hotspot-position-right .thegem-hotspot-tooltip {
+	left: 100%;
+	top: 50%;
+	transform: translateY(-50%) translateX(8px);
+}
+
+.thegem-hotspot-item.thegem-hotspot-position-right .thegem-hotspot-tooltip::before {
+	right: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	border-width: 6px 6px 6px 0;
+	border-color: transparent #333333cc transparent transparent;
+}
+
+/* Tooltip Trigger States */
+.thegem-hotspot-trigger-hover .thegem-hotspot-item:hover .thegem-hotspot-tooltip,
+.thegem-hotspot-trigger-click .thegem-hotspot-item.active .thegem-hotspot-tooltip,
+.thegem-hotspot-trigger-show-always .thegem-hotspot-tooltip {
+	visibility: visible;
+	opacity: 1;
+	transform: translateX(-50%) translateY(0);
+	pointer-events: auto;
+}
+
+.thegem-hotspot-trigger-hover .thegem-hotspot-item.thegem-hotspot-position-top:hover .thegem-hotspot-tooltip,
+.thegem-hotspot-trigger-click .thegem-hotspot-item.thegem-hotspot-position-top.active .thegem-hotspot-tooltip,
+.thegem-hotspot-trigger-show-always .thegem-hotspot-item.thegem-hotspot-position-top .thegem-hotspot-tooltip {
+	transform: translateX(-50%) translateY(-8px);
+}
+
+.thegem-hotspot-trigger-hover .thegem-hotspot-item.thegem-hotspot-position-bottom:hover .thegem-hotspot-tooltip,
+.thegem-hotspot-trigger-click .thegem-hotspot-item.thegem-hotspot-position-bottom.active .thegem-hotspot-tooltip,
+.thegem-hotspot-trigger-show-always .thegem-hotspot-item.thegem-hotspot-position-bottom .thegem-hotspot-tooltip {
+	transform: translateX(-50%) translateY(8px);
+}
+
+.thegem-hotspot-trigger-hover .thegem-hotspot-item.thegem-hotspot-position-left:hover .thegem-hotspot-tooltip,
+.thegem-hotspot-trigger-click .thegem-hotspot-item.thegem-hotspot-position-left.active .thegem-hotspot-tooltip,
+.thegem-hotspot-trigger-show-always .thegem-hotspot-item.thegem-hotspot-position-left .thegem-hotspot-tooltip {
+	transform: translateY(-50%) translateX(-8px);
+}
+
+.thegem-hotspot-trigger-hover .thegem-hotspot-item.thegem-hotspot-position-right:hover .thegem-hotspot-tooltip,
+.thegem-hotspot-trigger-click .thegem-hotspot-item.thegem-hotspot-position-right.active .thegem-hotspot-tooltip,
+.thegem-hotspot-trigger-show-always .thegem-hotspot-item.thegem-hotspot-position-right .thegem-hotspot-tooltip {
+	transform: translateY(-50%) translateX(8px);
+}
+
+/* Tooltip Animations */
+.thegem-hotspot-animation-fade .thegem-hotspot-tooltip {
+	transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.thegem-hotspot-animation-slide-up .thegem-hotspot-tooltip {
+	transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.thegem-hotspot-animation-zoom-in .thegem-hotspot-tooltip {
+	transform-origin: center;
+	transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.thegem-hotspot-animation-zoom-in .thegem-hotspot-item.thegem-hotspot-position-top .thegem-hotspot-tooltip,
+.thegem-hotspot-animation-zoom-in .thegem-hotspot-item.thegem-hotspot-position-bottom .thegem-hotspot-tooltip {
+	transform-origin: center top;
+}
+
+.thegem-hotspot-animation-zoom-in .thegem-hotspot-item.thegem-hotspot-position-left .thegem-hotspot-tooltip,
+.thegem-hotspot-animation-zoom-in .thegem-hotspot-item.thegem-hotspot-position-right .thegem-hotspot-tooltip {
+	transform-origin: left center;
+}
+
+/* Tooltip Content */
+.thegem-hotspot-tooltip-title.text-style-default {
+	font-family: var(--thegem-to-h6-font-family);
+	font-style: var(--thegem-to-h6-font-style);
+	font-weight: var(--thegem-to-h6-font-weight);
+	font-size: var(--thegem-to-body-font-size-small);
+	line-height: var(--thegem-to-body-line-height-small);
+	text-transform: none;
+	letter-spacing: 0;
+	margin: 0;
+}
+.thegem-hotspot-tooltip-title.text-style-default.bold {
+	font-weight: bold;
+}
+}
+
+.thegem-hotspot-tooltip-content {
+}
+
+.thegem-hotspot-tooltip-content p:last-child {
+	margin-bottom: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 767px) {
+	.thegem-hotspot-tooltip {
+		max-width: 200px;
+	}
+	
+	.thegem-hotspot-trigger-hover .thegem-hotspot-item .thegem-hotspot-tooltip {
+		display: none;
+	}
+	
+	.thegem-hotspot-trigger-hover .thegem-hotspot-item.active .thegem-hotspot-tooltip {
+		display: block;
+	}
+}
+
+
+
+
+
+
+/* Marker Animation - Additional Entrance Effects */
+.thegem-hotspot-item.thegem-hotspot-animation-slide-up.thegem-hotspot-visible {
+	animation-name: thegem-hotspot-slideUp;
+	opacity: 1;
+}
+
+.thegem-hotspot-item.thegem-hotspot-animation-slide-down.thegem-hotspot-visible {
+	animation-name: thegem-hotspot-slideDown;
+	opacity: 1;
+}
+
+.thegem-hotspot-item.thegem-hotspot-animation-slide-left.thegem-hotspot-visible {
+	animation-name: thegem-hotspot-slideLeft;
+	opacity: 1;
+}
+
+.thegem-hotspot-item.thegem-hotspot-animation-slide-right.thegem-hotspot-visible {
+	animation-name: thegem-hotspot-slideRight;
+	opacity: 1;
+}
+
+.thegem-hotspot-item.thegem-hotspot-animation-bounce.thegem-hotspot-visible {
+	animation-name: thegem-hotspot-bounceIn;
+	opacity: 1;
+}
+
+.thegem-hotspot-item.thegem-hotspot-animation-zoom-out.thegem-hotspot-visible {
+	animation-name: thegem-hotspot-zoomOut;
+	opacity: 1;
+}
+
+.thegem-hotspot-item.thegem-hotspot-animation-rotate.thegem-hotspot-visible {
+	animation-name: thegem-hotspot-rotateIn;
+	opacity: 1;
+}
+
+.thegem-hotspot-item.thegem-hotspot-animation-flip.thegem-hotspot-visible {
+	animation-name: thegem-hotspot-flipIn;
+	opacity: 1;
+}
+
+/* Additional Animation Keyframes */
+@keyframes thegem-hotspot-slideUp {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -30%);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+}
+
+@keyframes thegem-hotspot-slideDown {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -70%);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+}
+
+@keyframes thegem-hotspot-slideLeft {
+	from {
+		opacity: 0;
+		transform: translate(-30%, -50%);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+}
+
+@keyframes thegem-hotspot-slideRight {
+	from {
+		opacity: 0;
+		transform: translate(-70%, -50%);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+}
+
+@keyframes thegem-hotspot-bounceIn {
+	0% {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.3);
+	}
+	50% {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1.05);
+	}
+	70% {
+		transform: translate(-50%, -50%) scale(0.9);
+	}
+	100% {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+@keyframes thegem-hotspot-zoomOut {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(1.5);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+@keyframes thegem-hotspot-rotateIn {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -50%) rotate(-180deg) scale(0.5);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) rotate(0) scale(1);
+	}
+}
+
+@keyframes thegem-hotspot-flipIn {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -50%) perspective(400px) rotateY(90deg);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) perspective(400px) rotateY(0);
+	}
+}
+

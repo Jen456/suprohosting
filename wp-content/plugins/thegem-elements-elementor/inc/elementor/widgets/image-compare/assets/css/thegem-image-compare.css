@@ -1,0 +1,231 @@
+.thegem-image-compare-wrapper {
+	position: relative;
+	overflow: hidden;
+	user-select: none;
+}
+
+.thegem-image-compare-mode-drag {
+	cursor: grab;
+	-webkit-user-drag: none;
+	-khtml-user-drag: none;
+	-moz-user-drag: none;
+	-o-user-drag: none;
+	user-drag: none;
+}
+
+.thegem-image-compare-mode-drag:active {
+	cursor: grabbing;
+}
+
+.thegem-image-compare-mode-hover {
+	cursor: col-resize;
+}
+
+.thegem-image-compare-orientation-vertical.thegem-image-compare-mode-hover {
+	cursor: row-resize;
+}
+
+.thegem-image-compare-viewport {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.thegem-image-compare-img {
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+.thegem-image-compare-img.thegem-image-compare-img-after {
+	height: 100%;
+}
+
+.thegem-image-compare-img-before-wrapper {
+	position: relative;
+/*	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;*/
+	z-index: 1;
+}
+
+.thegem-image-compare-img-after-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	z-index: 2;
+}
+
+.thegem-image-compare-handle {
+	position: absolute;
+	z-index: 3;
+	pointer-events: none;
+}
+
+.thegem-image-compare-handle-inner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-style: solid;
+	border-color: #FFFFFF;
+	border-width: 3px;
+	background-color: rgba(255,255,255,0.2);
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	z-index: 10;
+}
+
+.thegem-image-compare-handle.with-shadow .thegem-image-compare-handle-inner {
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.thegem-image-compare-arrow {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-color: transparent;
+	border-width: var(--thegem-image-compare-arrow-size, 8px);
+}
+
+/* Horizontal Orientation */
+.thegem-image-compare-horizontal .thegem-image-compare-img-after-wrapper {
+	clip-path: inset(0 0 0 50%);
+}
+
+.thegem-image-compare-horizontal .thegem-image-compare-handle {
+	width: 2px;
+	height: 100%;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.thegem-image-compare-handle.with-shadow::before,
+.thegem-image-compare-handle.with-shadow::after {
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.thegem-image-compare-horizontal .thegem-image-compare-handle::before,
+.thegem-image-compare-horizontal .thegem-image-compare-handle::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 100%;
+	background-color: #FFFFFF;
+	transform: translateX(-50%);
+}
+
+.thegem-image-compare-horizontal .thegem-image-compare-handle::before {
+	top: 0;
+	height: calc(50% - 20px);
+}
+
+.thegem-image-compare-horizontal .thegem-image-compare-handle::after {
+	bottom: 0;
+	height: calc(50% - 20px);
+}
+
+.thegem-image-compare-horizontal .thegem-image-compare-arrow-left {
+	border-left-width: 0;
+	border-right-color: var(--thegem-image-compare-arrow-color, #FFFFFF);
+	margin-right: calc(var(--thegem-image-compare-arrow-size, 8px) / 2);
+}
+
+.thegem-image-compare-horizontal .thegem-image-compare-arrow-right {
+	border-right-width: 0;
+	border-left-color: var(--thegem-image-compare-arrow-color, #FFFFFF);
+	margin-left: calc(var(--thegem-image-compare-arrow-size, 8px) / 2);
+}
+
+/* Vertical Orientation */
+.thegem-image-compare-vertical .thegem-image-compare-img-after-wrapper {
+	clip-path: inset(50% 0 0 0);
+}
+
+.thegem-image-compare-vertical .thegem-image-compare-handle {
+	width: 100%;
+	height: 2px;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.thegem-image-compare-vertical .thegem-image-compare-handle::before,
+.thegem-image-compare-vertical .thegem-image-compare-handle::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	height: 100%;
+	background-color: #FFFFFF;
+	transform: translateY(-50%);
+}
+
+.thegem-image-compare-vertical .thegem-image-compare-handle::before {
+	left: 0;
+	width: calc(50% - 20px);
+}
+
+.thegem-image-compare-vertical .thegem-image-compare-handle::after {
+	right: 0;
+	width: calc(50% - 20px);
+}
+
+.thegem-image-compare-vertical .thegem-image-compare-handle-inner {
+	flex-direction: column;
+}
+
+.thegem-image-compare-vertical .thegem-image-compare-arrow-left {
+	border-top-width: 0;
+	border-bottom-color: var(--thegem-image-compare-arrow-color, #FFFFFF);
+	margin-bottom: calc(var(--thegem-image-compare-arrow-size, 8px) / 2);
+}
+
+.thegem-image-compare-vertical .thegem-image-compare-arrow-right {
+	border-bottom-width: 0;
+	border-top-color: var(--thegem-image-compare-arrow-color, #FFFFFF);
+	margin-top: calc(var(--thegem-image-compare-arrow-size, 8px) / 2);
+}
+
+.thegem-image-compare-label {
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #FFFFFF;
+	padding: 5px 10px;
+	z-index: 5;
+	transition: opacity 0.3s ease;
+	margin: 0;
+}
+
+.thegem-image-compare-label.text-style-default.bold {
+	font-weight: bold;
+}
+
+.thegem-image-compare-labels-hover-yes .thegem-image-compare-label {
+	opacity: 0;
+}
+
+.thegem-image-compare-labels-hover-yes:hover .thegem-image-compare-label,
+.thegem-image-compare-labels-hover-yes.is-dragging .thegem-image-compare-label {
+	opacity: 1;
+}
+
+.thegem-image-compare-label-before {
+	top: 10px;
+	left: 10px;
+}
+
+.thegem-image-compare-label-after {
+	bottom: 10px;
+	right: 10px;
+}

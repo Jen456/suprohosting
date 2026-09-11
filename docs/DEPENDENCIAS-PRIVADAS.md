@@ -1,6 +1,6 @@
 # Dependencias privadas
 
-Los paquetes comerciales se utilizan como dependencias instaladas en WordPress, pero **no se redistribuyen en este repositorio público**.
+Los paquetes comerciales se utilizan como dependencias instaladas en WordPress. Aunque el repositorio es privado, **no se publican como ZIP ni se redistribuyen fuera del proyecto licenciado**.
 
 ## TheGem Elementor
 
