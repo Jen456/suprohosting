@@ -1,0 +1,33 @@
+<?php
+/**
+ * Single Product title
+ *
+ * This template can be overridden by copying it to yourtheme/woocommerce/single-product/title.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @see        https://docs.woocommerce.com/document/template-structure/
+ * @package    WooCommerce\Templates
+ * @version    1.6.4
+ */
+
+global $thegem_product_data;
+
+$isLegacy = $thegem_product_data['product_page_layout'] === 'legacy';
+$isTitle = $thegem_product_data['product_page_elements_title'];
+$titleTag = 'h3';
+if(!$isLegacy && $isTitle && !empty($thegem_product_data['product_page_elements_title_html'])) {
+	$titleTag = $thegem_product_data['product_page_elements_title_html'];
+}
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+if ($isLegacy || $isTitle) {
+	the_title( '<' . $titleTag . ' class="product_title entry-title light">', '</' . $titleTag . '>');
+}
