@@ -1,5 +1,0 @@
-[21-Aug-2025 12:12:06 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ABSPATH" in /home/suprohosting/public_html/wp-settings.php:34
-Stack trace:
-#0 {main}
-  thrown in /home/suprohosting/public_html/wp-settings.php on line 34
-[28-Jul-2026 03:37:34 UTC] PHP Warning:  mysqli_real_connect(): (HY000/1040): Too many connections in /home/suprohosting/public_html/wp-includes/class-wpdb.php on line 1994
